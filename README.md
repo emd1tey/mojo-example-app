@@ -166,27 +166,3 @@ mojo llama2.mojo tl-chat.bin \
     -n 256 -t 0 -s 100 -i "<|im_start|>user\nGive me a python function to generate Fibonacci sequence<|im_end|>\n<|im_start|>assistant\n"
 ```
 
-**example output**
-
-```
-num hardware threads:  6
-SIMD vector width:  16
-checkpoint size:  4400767004 [ 4196 MB ]
-n layers:  22
-vocab size:  32003
-<|im_start|>user
-Give me a python function to generate Fibonacci sequence<|im_end|>
-<|im_start|>assistant
-Sure, here's a Python function that generates the Fibonacci sequence:
-
-def fibonacci(n):
-    if n <= 0:
-        return 0
-    elif n == 1:
-        return 1
-    else:
-        return fibonacci(n-1) + fibonacci(n-2)
-
-This function takes an integer n as a parameter and returns the next Fibonacci number. It uses a recursive approach to calculate the Fibonacci numbers, starting from 0 and working up. The function returns the value it found at the current level of the recursion, which can be either 0 or a Fibonacci number.
-```
-
