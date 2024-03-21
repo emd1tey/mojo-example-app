@@ -60,8 +60,8 @@ with gr.Blocks() as demo:
                 minimum=1, maximum=256, value=256, label="Number of tokens"
             )
             model_name = gr.Dropdown(
-                ["stories15M.bin", "stories42M.bin", "stories110M.bin", "tl-chat.bin"],
-                value="stories15M.bin",
+                ["llama/stories15M.bin", "llama/stories42M.bin", "llama/stories110M.bin", "tl-chat.bin"],
+                value="llama/stories15M.bin",
                 label="Model Size",
             )
             with gr.Row():
@@ -73,7 +73,7 @@ with gr.Blocks() as demo:
     # update maximum number of tokens based on model size
     model_name.change(
         lambda x: gr.update(maximum=1024)
-        if x == "stories110M.bin" or x == "stories42M.bin" or x == "tl-chat.bin"
+        if x == "llama/stories110M.bin" or x == "llama/stories42M.bin" or x == "tl-chat.bin"
         else gr.update(maximum=256),
         model_name,
         num_tokens,
