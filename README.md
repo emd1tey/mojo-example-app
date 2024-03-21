@@ -192,4 +192,3 @@ This function takes an integer n as a parameter and returns the next Fibonacci n
 
 ## license
 
-MIT
