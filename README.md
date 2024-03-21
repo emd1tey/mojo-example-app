@@ -158,11 +158,3 @@ wget https://huggingface.co/kirp/TinyLlama-1.1B-Chat-v0.2-bin/resolve/main/tok_t
 wget https://huggingface.co/kirp/TinyLlama-1.1B-Chat-v0.2-bin/resolve/main/tl-chat.bin
 ```
 
-Then, just run the Mojo
-
-```bash
-mojo llama2.mojo tl-chat.bin \
-    -z tok_tl-chat.bin \
-    -n 256 -t 0 -s 100 -i "<|im_start|>user\nGive me a python function to generate Fibonacci sequence<|im_end|>\n<|im_start|>assistant\n"
-```
-
