@@ -28,8 +28,12 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          tags: ${{ secrets.DOCKER_USER }}/mojo-example-app:latest
+          tags: |
+            ${{ secrets.DOCKER_USER }}/mojo-example-app:${{ github.run_number }}
+            ${{ secrets.DOCKER_USER }}/mojo-example-app:latest
           push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   deploy:
     needs: build-and-push
@@ -48,4 +52,5 @@ jobs:
             wget -nc https://huggingface.co/karpathy/tinyllamas/resolve/main/stories42M.bin
             wget -nc https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin
             echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
-            docker run -d -v /home/runner/mojo:/app/llama -p 7860:7860 --name llama2_mojo ${{ secrets.DOCKER_USER }}/mojo-example-app:latest
+            docker rm -f llama2_mojo || true
+            docker run -d -v /home/runner/mojo:/app/llama -p 127.0.0.1:7860:7860 --name llama2_mojo ${{ secrets.DOCKER_USER }}/mojo-example-app:${{ github.run_number }}
