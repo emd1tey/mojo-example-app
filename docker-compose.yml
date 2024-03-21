@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  llama2_mojo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        AUTH_KEY: "5ca1ab1e"  
+    ports:
+      - "7860:7860"  
+    image: llama2.mojo  
+    container_name: llama2_mojo
