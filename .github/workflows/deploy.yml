@@ -30,6 +30,7 @@ jobs:
         with:
           context: .
           tags: ghcr.io/${{ github.repository }}:latest
+          push: true
 
   deploy:
     needs: build-and-push
@@ -44,7 +45,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /home/runner/mojo/
-            wget -c https://huggingface.co/karpathy/tinyllamas/resolve/main/stories15M.bin
-            wget -c https://huggingface.co/karpathy/tinyllamas/resolve/main/stories42M.bin
-            wget -c https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin
+            wget -nc https://huggingface.co/karpathy/tinyllamas/resolve/main/stories15M.bin
+            wget -nc https://huggingface.co/karpathy/tinyllamas/resolve/main/stories42M.bin
+            wget -nc https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin
             docker run -it -v /home/runner/mojo:/app -p 7860:7860 --name llama2_mojo ghcr.io/${{ github.repository }}:latest
