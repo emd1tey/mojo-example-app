@@ -65,9 +65,6 @@ USER user
 WORKDIR $HOME/app
 
 COPY --chown=user . $HOME/app
-#RUN wget -c https://huggingface.co/karpathy/tinyllamas/resolve/main/stories15M.bin
-#RUN wget -c https://huggingface.co/karpathy/tinyllamas/resolve/main/stories42M.bin
-#RUN wget -c https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin
 
 #CMD mojo llama2.mojo llama/stories42M.bin -s 99 -n 256 -t 0.5 -i "Llama is an animal"
 CMD ["python3", "gradio_app.py"]
