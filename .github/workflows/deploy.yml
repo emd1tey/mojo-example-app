@@ -21,15 +21,14 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ${{ github.repository }}:latest
           push: true
 
   deploy:
@@ -48,4 +47,5 @@ jobs:
             wget -nc https://huggingface.co/karpathy/tinyllamas/resolve/main/stories15M.bin
             wget -nc https://huggingface.co/karpathy/tinyllamas/resolve/main/stories42M.bin
             wget -nc https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin
-            docker run -it -v /home/runner/mojo:/app -p 7860:7860 --name llama2_mojo ghcr.io/${{ github.repository }}:latest
+            echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+            docker run -it -v /home/runner/mojo:/app -p 7860:7860 --name llama2_mojo ${{ github.repository }}:latest
