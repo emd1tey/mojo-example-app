@@ -48,4 +48,4 @@ jobs:
             wget -nc https://huggingface.co/karpathy/tinyllamas/resolve/main/stories42M.bin
             wget -nc https://huggingface.co/karpathy/tinyllamas/resolve/main/stories110M.bin
             echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
-            docker run -it -v /home/runner/mojo:/app/llama -p 7860:7860 --name llama2_mojo ${{ secrets.DOCKER_USER }}/mojo-example-app:latest
+            docker run -d -v /home/runner/mojo:/app/llama -p 7860:7860 --name llama2_mojo ${{ secrets.DOCKER_USER }}/mojo-example-app:latest
